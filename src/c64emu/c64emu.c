@@ -108,6 +108,9 @@ emu_capabilities_t * emu_capabilities();
 int
 core_init()
 {
+    resources_set_int("ExtraJoy", 1);
+    resources_set_int("ExtraJoyType", 0);
+
     // Turning sound warp mode on prevents start-up clicks when Vice starts up
     // its sound core.
     sound_set_warp_mode(1);
