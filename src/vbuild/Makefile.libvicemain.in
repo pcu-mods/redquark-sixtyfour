@@ -114,8 +114,13 @@ OBJS    = $(addprefix $(OBJ)/,$(OBJF))
 #
 devel := CFLAGS += -g -DDEVELOPMENT
 
-all: hello dirs $(OURLIB) $(OURLIBSO)
+all: pcuversion.h hello dirs $(OURLIB) $(OURLIBSO)
 	@echo Done
+
+.PHONY: pcuversion.h
+pcuversion.h:
+	echo "Generating 'pcuversion.h'..."
+	echo "#define PCU_VERSION \""`git -C $(SDIR) rev-parse --abbrev-ref HEAD`"-"`git -C $(SDIR) describe --always --abbrev=7 --dirty=+DIRTY`"\"" > $(SDIR)/pcuversion.h
 
 c64: 
 
